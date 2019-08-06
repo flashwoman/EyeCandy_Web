@@ -8,7 +8,7 @@
 
 #### 1. 현재 버전
 
-​	openCV의 window를 웹과 연결하지 못한 상태입니다. 따라서 유저가 책장을 선택하여 책과 분리하는 로직이 연결되지 못했습니다. 전체 로직 확인을 위해 중간 단계에 속하는 해당 로직(책-책장의 구분)의 결과인 마스크 이미지([test1_mask.jpg](https://github.com/flashwoman/EyeCandy_Web/blob/master/CandyMaker/img/masks/test1_mask.jpg))를 미리 저장하였고, [test1.jpg](https://github.com/flashwoman/EyeCandy_Web/blob/master/media/origin/test1.jpg) 파일로 확인합니다.
+​	openCV의 window를 웹과 연결하지 못한 상태입니다. 따라서 유저가 책장을 선택하여 책과 분리하는 로직이 가능하여, 전체 로직 확인을 위해 중간 단계에 속하는 해당 로직(책-책장의 구분)의 결과인 마스크 이미지([test1_mask.jpg](https://github.com/flashwoman/EyeCandy_Web/blob/master/CandyMaker/img/masks/test1_mask.jpg))를 미리 저장하였고, [test1.jpg](https://github.com/flashwoman/EyeCandy_Web/blob/master/media/origin/test1.jpg) 파일로 확인합니다.
 
 
 
