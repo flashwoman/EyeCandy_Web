@@ -1,0 +1,39 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block body %}
+
+<body>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="{% static '/js/gallery.js' %}"    ></script>
+    <div id="container" >
+        <main>
+            <div id="gallery">
+                <div id="gallery-container">
+                    <div id="gallery-prev-button">
+                        <i class="material-icons" >
+                            <
+                        </i>
+                    </div>
+                    <div id="gallery-main-picture" style="background-image:url('{{last.result}}')">
+
+                    </div>
+                    <div id="gallery-next-button">
+                        <i class="material-icons">
+                            >
+                        </i>
+                    </div>
+                </div>
+                <div id="gallery-other-item-container">
+                    <input type="hidden" id="page" value="1" />
+                    {% for img in images %}
+                        <div class='gallery-other-item active' style="background-image:url('{{ img.result }}')" data-page="{{ forloop.counter }}" data-src='{{img.result}}'></div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </main>
+    </div>
+</body>
+
+
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block body %}
+                <div id="page-1" class="page active">
+                    <div id="eye-candy-pic">
+                        <img src= "{% static '/images/books.png' %}" >
+                    </div>
+                    <div id='eye-candy-content'>
+                        <h2>Beautify Your Book shelf</h2>
+
+                        <div>
+                            <button id="main-button" onclick="toPage(2)">Start</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="page-2"  class="page">
+                    <div id="picture-container">
+                        <div class='image-viewer' style="border:1px solid #eee;">
+                            <div id="image-viewer-text">Upload your Image file</div>
+                            <img id="image" style="width:auto;height:100%;">
+                        </div>
+                    </div>
+
+                    <form action="/EyeCandy_Web/analyse/" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="file" id="file" name = "file" accept="image/*" style="display:none;">
+                        <div id="page-2-button-container">
+                            <div>
+                                <div id="upload-button" onclick="openFile()">Upload</div>
+                            </div>
+<!--                            <div id="select-container">-->
+<!--                                <label for="how-many">How many rows? </label>-->
+<!--                                <select id='how-many' name = 'how-many'>-->
+<!--                                    <option value="1">1</option>-->
+<!--                                    <option value="2">2</option>-->
+<!--                                    <option value="3">3</option>-->
+<!--                                    <option value="4">4</option>-->
+<!--                                    <option value="5">5</option>-->
+<!--                                    <option value="6">6</option>-->
+<!--                                </select>-->
+<!--                            </div>-->
+
+                            <div  >
+                                <input type="submit" id="figure-button"  style="margin-top:5px;" , value="GO!"></input>
+                            </div>
+
+
+                        </div>
+                    </form>
+                </div>
+
+
+{% endblock %}

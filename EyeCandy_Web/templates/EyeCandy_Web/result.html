@@ -1,0 +1,20 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block body %}
+                <div id="page">
+                        <div id="picture-container">
+                            <div class='result-image-viewer'>
+<!--                                <img src = "{{ image.origin.url }}" id="image-before" >-->
+<!--                                <img src = "{% static '/images/icons-arrow1.png' %}" id="result-arrow">-->
+                                <img src = "{{ image.result }}" id="image-after" name="image"  >
+                            </div>
+                        </div>
+
+                        <div id='result-content'>
+                                <div>
+                                    <a href="{% url 'EyeCandy_Web:gallery' %}"> <button type="submit" id="main-button">Save to Gallery</button></a>
+                                </div>
+                        </div>
+                </div>
+
+{% endblock %}
