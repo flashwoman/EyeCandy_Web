@@ -262,15 +262,16 @@ main{
 }
 #gallery-container{
     width: 1000px;
-    height:400px;
+    height:800px;
     display:flex;
     justify-content: center;
     align-items:center;
+
 }
 #gallery-main-picture{
-    width:500px;
-    height:300px;
-    background-size:cover
+    background-size:auto;
+
+
 }
 #gallery-next-button,
 #gallery-prev-button{

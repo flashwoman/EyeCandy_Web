@@ -23,6 +23,6 @@ urlpatterns = [
     path('analyse/', views.analyse, name='analyse'),
     path('gallery/', views.gallery, name='gallery'),
     path('result/<int:image_pk>/', views.result, name='result'),
-    path('savetogallery/', views.savetogallery, name='savetogallery'),
+    path('savetogallery/<int:image_pk>', views.savetogallery, name='savetogallery'),
 
 ]

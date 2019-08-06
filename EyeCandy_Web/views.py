@@ -42,11 +42,12 @@ def savetogallery(request, image_pk):
     image = Image.objects.get(pk=image_pk)
     image.to_gallery = True
     image.save()
-    return render(request, 'EyeCandy_Web/gallery.html')
+    return redirect('EyeCandy_Web:gallery')
 
 def gallery(request):
     # 갤러리로 보여줄 것들만 가져온다.
     images = Image.objects.filter(to_gallery = True)
+    print('here: ', images)
     last = Image.objects.last()
 
     context= {'images':images, 'last':last }
