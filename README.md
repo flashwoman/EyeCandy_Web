@@ -22,7 +22,7 @@
 
 - **실행 결과 이미지**
 
-  !<img src="https://github.com/flashwoman/EyeCandy_Web/blob/master/media/origin/test1.jpg?raw=true" style="width:350px">  ▶▶   <img src="https://github.com/flashwoman/EyeCandy_Web/blob/master/media/output/output_test1.jpg?raw=true">
+<img src="https://github.com/flashwoman/EyeCandy_Web/blob/master/media/origin/test1.jpg?raw=true" style="width:350px">  ▶▶   <img src="https://github.com/flashwoman/EyeCandy_Web/blob/master/media/output/output_test1.jpg?raw=true">
 
   
 
