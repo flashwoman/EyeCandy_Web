@@ -1,9 +1,9 @@
 import numpy as np
 import cv2 as cv
-from bookshelf.function.contours import contours
+from CandyMaker.bookshelf.function.contours import contours
 # from bookshelf.function.display import display
-from bookshelf.function.preprocessing import preprocessing
-from ann.function.sompy import SOMFactory, SOM
+from CandyMaker.bookshelf.function.preprocessing import preprocessing
+from CandyMaker.ann.function.sompy import SOMFactory, SOM
 import pandas as pd
 
 
@@ -15,6 +15,9 @@ img_res = img_org.copy()
 
 
 # 2. preprocess images
+
+
+
 img = preprocessing(img)
 img, rect = contours(img,img_org)
 # from bookshelf.function.contours_grad import contours_grad
@@ -118,13 +121,10 @@ quantization_error = np.mean(network._bmu[1])
 ## 3. Visualization
 ### 1. component planes view ('b','g','r','book_height')
 from ann.function.visualization.mapview import View2D
-
 view2D = View2D(6,6,"rand data",text_size=9)
-
 
 ### 2. U-matrix plot
 from ann.function.visualization.umatrix import UMatrixView
-
 umat = UMatrixView(width=6, height=6, title='U-matrix')
 
 
@@ -147,9 +147,7 @@ hits = HitMapView(9,6, "Clustering", text_size=10)
 
 
 ## 6. Labeling coordinates
-
 bmu_nodes = network.find_k_nodes(data, k=1) # bmu_nodes = 135 X k
-# concatenate in one list
 bmu_nodes_list = []
 
 for i in bmu_nodes[1]:
@@ -157,13 +155,13 @@ for i in bmu_nodes[1]:
         bmu_nodes_list.append(j)
 
 bmu_nodes_arr = np.asarray(bmu_nodes_list)
-# print('bmu_nodes_arr :\n',bmu_nodes_arr)
+
 '''
 input : bmu_ind = best matching unit index ---> ouput : corresponding matrix x,y coordinates
 calculate coordinates logic : index = x + (y * width)
 '''
 x_y_ind = network.bmu_ind_to_xy(bmu_nodes_arr)
-# print('bmu xy index :\n',x_y_ind, len(x_y_ind))
+
 
 
 # 7. current index, target index
@@ -177,38 +175,24 @@ for ind, x_y_ind in enumerate(x_y_ind):
     temp_x = x_y_ind[1]
     temp_y = x_y_ind[0]
     cur_node_coord.append([temp_x, temp_y])
-    # print(ind, x_y_ind[2])
-
-# print('tar_ind : \n',tar_ind, '\n\n')
-# print('cur_ind : \n', cur_ind, '\n\n')
-
-
 
 # 8. Rearrange Books
-from bookshelf.function.create_bookshelf import create_bookshelf
+from CandyMaker.bookshelf.function.create_bookshelf import create_bookshelf
 
 ## 1. get bookshelf
 mean_book_height = float(np.mean(h_val))
-print("mean_booksize : ", mean_book_height)
 opt_shelf_height = round(mean_book_height * 1.5)
 shelf_width, shelf_height, shelf_coords_bottom, shelf_coords_top, img_boxes = create_bookshelf(img_org, np.array(h_val).max())
 
-# print('shelf_coords_bottom :\n',shelf_coords_bottom)
-# print('shelf_coords_bottom access x_y:\n', shelf_coords_bottom[0][0][0], shelf_coords_bottom[0][0][1])
-# print('shelf_width :\n',shelf_width)
-# print('shelf_height :\n',shelf_height)
-
 ## 2. define variables
-
 ### define variables
 book_slice = []
 book_arr = []
 roi=[]
 num_of_book = round(len(tar_ind)/4)
-# print("num_of_book :", num_of_book)
 width_per_book = round(shelf_width / num_of_book)
-# print("proportioned book width", width_per_book)
 boxes = img_boxes.copy()
+
 
 ## 3. paste books on new bookshelf
 for n in range(4):
@@ -232,8 +216,6 @@ for n in range(4):
 
             ### 1. select book to paste
             #### image source coord
-            # print('rb coord :\n', rb_coord)
-            # print('rb coord access :\n', rb_coord[i])
             [x2, y1] = rb_coord[i + (num_of_book*n)]
             [x1, y1] = lb_coord[i + (num_of_book*n)]
             [x1, y2] = lt_coord[i + (num_of_book*n)]
@@ -252,19 +234,12 @@ for n in range(4):
 
                 else:
                     print("It's quite big book XD")
-                    # prop = width_per_book / width_real
-                    # print("else clac_prop :", width_real, width_per_book, prop)
-                    # height_per_book = int(prop * height_real)
-                    # print("proportioned book height", height_per_book)
-                    # y2 = y1 + height_per_book
 
                 width_per_book = width_real
                 height_per_book = height_real
                 # print("proportioned book height", height_per_book)
 
                 ### 2. image slice
-                # print('roi y range', y1, y2)
-                # print('roi x range', x1, x2)
                 roi = img_res[y1:y2, x1:x2]
                 print("roi shape :", np.array(roi).shape)
 
@@ -273,16 +248,9 @@ for n in range(4):
 
                     print(f"#{i+1} book")
 
-                    # set range
-                    # print("tar coord", tar_x1, width_per_book, tar_y1, height_per_book)
                     tar_x2 = tar_x1 + width_per_book
                     tar_y2 = tar_y1 + height_per_book
 
-                    # paste
-                    # print("tar_roi y range", tar_y1, tar_y2)
-                    # print("tar_roi x range", tar_x1, tar_x2)
-                    # print(tar_y2 - tar_y1)
-                    # print(np.array(img_boxes).shape)
                     print("target roi shape :", np.array(img_boxes[tar_y1:tar_y2, tar_x1:tar_x2]).shape)
                     img_boxes[tar_y1:tar_y2, tar_x1:tar_x2] = roi
 
@@ -310,26 +278,10 @@ for n in range(4):
 
 # 9. image post-processing
 img_boxes = cv.flip(img_boxes, 0)
-
-
 # 10. show and write image!!!!
-from bookshelf.function.img_write import img_write
-
-# cv.imshow("origin image", img_org)
-# cv.imshow("roi", roi)
-# cv.imshow("img_boxes", img_boxes)
-# img_write('final_result', img_boxes)
-# cv.waitKey(0)
-
+from CandyMaker.bookshelf.function.img_write import img_write
 img_write("output", img_boxes)
 print("codes executed properly")
 # 10. ~~Session End~~
 # cv.destroyAllWindows()
-
-
-
-
-# KMeans(algorithm='auto', copy_x=True, init='k-means++', max_iter=300,
-#        n_clusters=11, n_init=10, n_jobs=None, precompute_distances='auto',
-#        random_state=None, tol=0.0001, verbose=0)
 

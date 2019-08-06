@@ -1,7 +1,5 @@
 import cv2 as cv
 
-
-
 def display(winname, img):
 
     cv.moveWindow(winname, 500, 0)

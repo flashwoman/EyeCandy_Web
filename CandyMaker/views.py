@@ -31,26 +31,6 @@ def startmaker(request, param):
     # img = preprocessing(img)
     print('2')
 
-    # img, rect = contours(img, img_org)  # rect에 좌표 저장 [Left_Top, Right_Bottom]
-    # print('3')
-    # # organizing rect
-    # lt_x = [];
-    # lt_y = [];
-    # rb_x = [];
-    # rb_y = [];
-    # lt_coord = [];
-    # rb_coord = []
-    # for i in range(len(rect)):
-    #     lt_x.append(list(rect[i][0])[0])
-    #     lt_y.append(list(rect[i][0])[1])
-    #     rb_x.append(list(rect[i][1])[0])
-    #     rb_y.append(list(rect[i][1])[1])
-    #     lt_coord.append([lt_x, lt_y])
-    #     rb_coord.append([rb_x, rb_y])
-
-    ## 6. Rearrange Books
-    # coords = create_bookshelf(img_org)
-    #print(coords)
 
     print('gi')
     return redirect('EyeCandy_Web:result', pk)
